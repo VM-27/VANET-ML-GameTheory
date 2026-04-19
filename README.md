@@ -1,6 +1,6 @@
 # 🚗 VANET ML + Game Theory Project
 
-## 📌 Overview
+##  Overview
 This project implements an intelligent VANET system using:
 - Machine Learning (Cluster Head Selection)
 - Game Theory (Dynamic Optimization)
@@ -11,12 +11,12 @@ This project implements an intelligent VANET system using:
 
 ---
 
-## ⚙️ Pipeline
+## ⚙️Pipeline
 SUMO → ML → Game Theory → ns-3 → FlowMonitor → NetAnim
 
 ---
 
-## 📊 Results
+##  Results
 | Method | PDR (%) | Delay (s) | Throughput |
 |-------|--------|----------|-----------|
 | Static ML | 79.37 | 0.0069 | 0.006 |
@@ -24,7 +24,7 @@ SUMO → ML → Game Theory → ns-3 → FlowMonitor → NetAnim
 
 ---
 
-## 📡 Routing Comparison
+##  Routing Comparison
 | Protocol | PDR (%) |
 |----------|--------|
 | AODV | 23 |
@@ -32,12 +32,12 @@ SUMO → ML → Game Theory → ns-3 → FlowMonitor → NetAnim
 
 ---
 
-## 🎥 Visualization
+##  Visualization
 NetAnim is used for packet-level animation.
 
 ---
 
-## 🚀 How to Run
+##  How to Run
 
 ```bash
 cd ~/VANET-ML-GameTheory
