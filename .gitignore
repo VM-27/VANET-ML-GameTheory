@@ -1,0 +1,10 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.o
+*.out
+*.xml
+build/
+cmake-cache/
+.cache/

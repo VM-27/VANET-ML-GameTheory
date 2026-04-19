@@ -1,0 +1,136 @@
+    1  cd ~/ns-3-dev
+    2  ls scratch
+    3  nano scratch/vanet_baseline.cc
+    4  ./ns3 run "scratch/vanet_baseline --nNodes=25 --simTime=30"
+    5  nano scratch/vanet_baseline.cc
+    6  ./ns3 run "scratch/vanet_baseline --nNodes=25 --simTime=30"
+    7  ls -l flowmon.xml
+    8  nano scratch/vanet_baseline.cc
+    9  ./ns3 run "scratch/vanet_baseline --nNodes=25 --simTime=30"
+   10  nano scratch/vanet_baseline.cc
+   11  ls -l flowmon.xml
+   12  mkdir -p logs
+   13  mv flowmon.xml logs/flowmon.xml
+   14  ls -l logs/flowmon.xml
+   15  pip3 install lxml
+   16  nano parse_flowmon.py
+   17  python3 parse_flowmon.py
+   18  nano scratch/vanet_baseline.cc
+   19  ./ns3 run "scratch/vanet_baseline --nNodes=25 --simTime=30"
+   20  mv flowmon.xml logs/flowmon.xml
+   21  python3 parse_flowmon.py
+   22  cd ~
+   23  mkdir VANET-ML-GameTheory
+   24  cd VANET-ML-GameTheory
+   25  mkdir sumo ns3 logs ml analysis results docs
+   26  sumo-gui
+   27  cd ~/VANET-ML-GameTheory/sumo
+   28  cd sumo
+   29  ~/VANET-ML-GameTheory/sumo$
+   30  netgenerate --grid --grid.number=5 --grid.length=200 --output-file=grid.net.xml
+   31  ls
+   32  randomTrips.py -n grid.net.xml -o trips.trips.xml -e 100 -p 2
+   33  which randomTrips.py
+   34  ls /usr/share/sumo/tools
+   35  python3 /usr/share/sumo/tools/randomTrips.py -n grid.net.xml -o trips.trips.xml -e 100 -p 2
+   36  ls
+   37  duarouter -n grid.net.xml -t trips.trips.xml -o routes.rou.xml
+   38  ls
+   39  nano grid.sumocfg
+   40  sumo-gui grid.sumocfg
+   41  nano grid.sumocfg
+   42  sumo -c grid.sumocfg
+   43  nano grid.sumocfg
+   44  sumo -c grid.sumocfg
+   45  nl -ba grid.sumocfg
+   46  sudo apt install dos2unix -y
+   47  dos2unix grid.sumocfg
+   48  sumo -c grid.sumocfg
+   49  cat > grid.sumocfg << 'EOF'
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <input>
+        <net-file value="grid.net.xml"/>
+        <route-files value="routes.rou.xml"/>
+    </input>
+
+    <time>
+        <begin value="0"/>
+        <end value="100"/>
+    </time>
+
+    <output>
+        <fcd-output value="mobility.xml"/>
+    </output>
+</configuration>
+EOF
+
+   50  nl -ba grid.sumocfg
+   51  sumo -c grid.sumocfg
+   52  ls -l mobility.xml
+   53  mkdir -p ~/VANET-ML-GameTheory/ns3/sumo_traces
+   54  cp ~/VANET-ML-GameTheory/sumo/mobility.xml ~/VANET-ML-GameTheory/ns3/sumo_traces/mobility.xml
+   55  ls -l ~/VANET-ML-GameTheory/ns3/sumo_traces/mobility.xml
+   56  cd ~/VANET-ML-GameTheory/ns3
+   57  nano sumo_to_ns2trace.py
+   58  python3 sumo_to_ns2trace.py
+   59  ls -l sumo_traces/ns2mobility.tcl
+   60  cd ~/ns-3-dev
+   61  nano scratch/vanet_sumo_mobility.cc
+   62  cd ~/ns-3-dev
+   63  ./ns3 run "scratch/vanet_sumo_mobility --nNodes=50 --simTime=100"
+   64  ls -l flowmon_sumo.xml
+   65  python3 parse_flowmon_sumo.py
+   66  ls ~
+   67  nano parse_flowmon_sumo.py
+   68  python3 parse_flowmon_sumo.py
+   69  sumo-gui grid.sumocfg
+   70  cd ~/VANET-ML-GameTheory
+   71  mkdir -p ml/data ml/models ml/scripts
+   72  cp sumo/mobility.xml ml/data/mobility.xml
+   73  ls -l ml/data/mobility.xml
+   74  nano ml/scripts/build_dataset.py
+   75  cd ~/VANET-ML-GameTheory/ml/scripts
+   76  python3 build_dataset.py
+   77  head -n 5 ../data/vanet_dataset.csv
+   78  wc -l ../data/vanet_dataset.csv
+   79  pip3 install pandas scikit-learn joblib matplotlib
+   80  nano ~/VANET-ML-GameTheory/ml/scripts/train_model.py
+   81  cd ~/VANET-ML-GameTheory/ml/scripts
+   82  python3 train_model.py
+   83  ls -l ../models/stability_rf.pkl
+   84  sudo apt install python3-venv python3-full -y
+   85  cd ~/VANET-ML-GameTheory
+   86  python3 -m venv venv
+   87  source venv/bin/activate
+   88  pip install pandas scikit-learn joblib matplotlib
+   89  cd ml/scripts
+   90  python train_model.py
+   91  ls -l ../models/stability_rf.pkl
+   92  python train_model.py
+   93  nano select_cluster_heads.py
+   94  python select_cluster_heads.py
+   95  nano cluster_assignments.py
+   96  python cluster_assignments.py
+   97  ls -l ../data/cluster_assignments.csv
+   98  python cluster_assignments.py
+   99  nano cluster_assignments.py
+  100  python cluster_assignments.py
+  101  nano cluster_assignments.py
+  102  python cluster_assignments.py
+  103  nano cluster_assignments.py
+  104  python cluster_assignments.py
+  105  nano cluster_assignments.py
+  106  python cluster_assignments.py
+  107  python - << 'PY'
+import pandas as pd, xml.etree.ElementTree as ET
+df = pd.read_csv("../data/vanet_dataset.csv")
+print("dataset time min/max:", df["time"].min(), df["time"].max())
+tree = ET.parse("../data/mobility.xml")
+root = tree.getroot()
+times = [float(ts.get("time")) for ts in root.findall("timestep")]
+print("mobility time min/max:", min(times), max(times))
+PY
+
+  108  history > command_history.txt
